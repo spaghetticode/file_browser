@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/spaghetticode/fakefs.git
+  revision: c64330126901b5e97665eddd86cc386aab383786
+  specs:
+    fakefs (0.4.2)
+
 PATH
   remote: .
   specs:
@@ -147,6 +153,7 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
+  fakefs!
   file_browser!
   guard-rspec
   jquery-rails

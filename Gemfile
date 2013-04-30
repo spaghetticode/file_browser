@@ -15,3 +15,4 @@ gem "jquery-rails"
 
 # To use debugger
 # gem 'debugger'
+gem 'fakefs', :git => 'https://github.com/spaghetticode/fakefs.git', :require => 'fakefs/safe'
