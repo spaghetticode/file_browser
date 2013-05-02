@@ -7,6 +7,10 @@ module FileBrowser
 
     before { create_dir path }
 
+    it 'has the root directory as base path name' do
+      Path::BASE.should == '/'
+    end
+
     it 'requires a name parameter' do
       expect { Path.new }.to raise_error(ArgumentError)
     end

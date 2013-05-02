@@ -1,6 +1,7 @@
 module FileBrowser
   class Path
     class NotFoundError < Exception; end
+    BASE = '/'
 
     attr_reader :name
 
