@@ -2,13 +2,27 @@ require 'spec_helper'
 
 module FileBrowser
   describe Path do
-    let(:path) { 'tempdir' }
-    subject { Path.new(path) }
+    let(:name) { 'tempdir' }
+    subject { Path.new(name) }
 
-    before { create_dir path }
+    before { create_dir name }
 
     it 'has the root directory as base path name' do
       Path::BASE.should == '/'
+    end
+
+    describe '::name_from_params' do
+      context 'when params[:id] is root' do
+        it 'is the base path name when params[:id] is root' do
+          params = {:id => 'root'}
+          Path.name_from_params(params).should == Path::BASE
+        end
+      end
+
+      it 'is params[:id]' do
+        params = {:id => name}
+        Path.name_from_params(params).should == name
+      end
     end
 
     it 'requires a name parameter' do
@@ -29,14 +43,14 @@ module FileBrowser
       end
 
       it 'finds directories under the path' do
-        entry_name = File.join(path, 'somedir')
+        entry_name = File.join(name, 'somedir')
         create_dir entry_name
         subject.entries.map(&:name).should include entry_name
       end
 
       it 'correctly sets the type of entry' do
 
-        entry_name = File.join(path, 'somedir')
+        entry_name = File.join(name, 'somedir')
         create_dir entry_name
         dir = subject.entries.detect { |e| e.name == entry_name }
         dir.type.should == Entry::DIRECTORY
@@ -44,7 +58,7 @@ module FileBrowser
     end
 
     it 'represents the name and entries in json format' do
-      json_hash = {:name => 'tempdir', :entries => []}.stringify_keys!
+      json_hash = {:name => name, :entries => []}.stringify_keys!
       subject.as_json.should == json_hash
     end
   end
