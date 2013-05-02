@@ -20,18 +20,22 @@ module FileBrowser
     describe '#entries' do
       it { subject.entries.should be_an Array }
 
-      it 'includes the parent directory' do
-        subject.entries.should include('..')
-      end
-
-      it 'doesnt include the current directory' do
-        subject.entries.should_not include('.')
+      it 'is a collection of entries' do
+        subject.entries.should be_all { |e| Entry === e }
       end
 
       it 'finds directories under the path' do
-        dirname = 'somedir'
-        create_child_dir dirname
-        subject.entries.should include dirname
+        entry_name = File.join(path, 'somedir')
+        create_dir entry_name
+        subject.entries.map(&:name).should include entry_name
+      end
+
+      it 'correctly sets the type of entry' do
+
+        entry_name = File.join(path, 'somedir')
+        create_dir entry_name
+        dir = subject.entries.detect { |e| e.name == entry_name }
+        dir.type.should == 'directory'
       end
     end
   end
