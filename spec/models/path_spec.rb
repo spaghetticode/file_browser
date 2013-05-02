@@ -39,7 +39,7 @@ module FileBrowser
         entry_name = File.join(path, 'somedir')
         create_dir entry_name
         dir = subject.entries.detect { |e| e.name == entry_name }
-        dir.type.should == 'directory'
+        dir.type.should == Entry::DIRECTORY
       end
     end
 
