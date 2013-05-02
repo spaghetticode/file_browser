@@ -16,3 +16,6 @@ gem "jquery-rails"
 # To use debugger
 # gem 'debugger'
 gem 'fakefs', :git => 'https://github.com/spaghetticode/fakefs.git', :require => 'fakefs/safe'
+gem 'pry'
+gem 'sass-rails', '~> 3.2'
+gem 'bootstrap-sass', '~> 2.3.1.0'
