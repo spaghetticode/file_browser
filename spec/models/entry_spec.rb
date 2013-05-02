@@ -13,9 +13,13 @@ module FileBrowser
     it { subject.should respond_to(:type) }
     it { subject.type.should == FileBrowser::Entry::DIRECTORY }
 
-    describe '#to_json' do
-      it { subject.should respond_to(:to_json) }
-      it { subject.to_json.should be_a(Hash) }
+    it 'has only file and directory types' do
+      Entry::TYPES.should == [Entry::DIRECTORY, Entry::FILE]
+    end
+
+    it 'represents the name, path and type in json format' do
+      json_hash = {:name => 'root/somedir', :type => 'directory', :parent_name => 'root'}.stringify_keys!
+      subject.as_json.should == json_hash
     end
   end
 end

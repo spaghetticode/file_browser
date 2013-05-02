@@ -6,6 +6,8 @@ module FileBrowser
 
     attr_reader :name, :path, :type
 
+    # TODO path is basically useless here; the parent_name attribute is probably useless too, so
+    # the path object could be entirely removed from initialization params
     def initialize(name, path)
       @name = name
       @path = path
@@ -16,8 +18,8 @@ module FileBrowser
       path.name
     end
 
-    def to_json
-      {:name => name, :type => type, :parent_name => parent_name }
+    def as_json(opts={})
+      {'name' => name, 'type' => type, 'parent_name' => parent_name }
     end
 
     private

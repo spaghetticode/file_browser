@@ -42,5 +42,10 @@ module FileBrowser
         dir.type.should == 'directory'
       end
     end
+
+    it 'represents the name and entries in json format' do
+      json_hash = {:name => 'tempdir', :entries => []}.stringify_keys!
+      subject.as_json.should == json_hash
+    end
   end
 end
