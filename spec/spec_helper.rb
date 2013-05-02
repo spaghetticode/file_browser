@@ -37,4 +37,6 @@ RSpec.configure do |config|
   config.order = "random"
   config.include SpecHelpers
   config.include FakeFS::SpecHelpers
+  # otherwise controller specs won't recognize mounted routes
+  config.before(:each, type: :controller) { @routes = FileBrowser::Engine.routes }
 end
