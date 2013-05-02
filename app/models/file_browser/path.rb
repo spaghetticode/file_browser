@@ -6,18 +6,15 @@ module FileBrowser
     attr_reader :name
 
     def initialize(name)
-      @name = name
-      validate_name
+      raise NotFoundError unless File.exists?(name)
+      @name    = name
+      @entries = entries
     end
 
     def entries
       Dir.glob("#{name}/*").map do |entry_name|
         Entry.new(entry_name, self)
       end
-    end
-
-    def validate_name
-      raise NotFoundError unless File.exists?(name)
     end
 
     def full_entry_name(entry_name)
