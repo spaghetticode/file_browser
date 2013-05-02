@@ -4,22 +4,15 @@ module FileBrowser
     DIRECTORY = 'directory'
     TYPES     = [DIRECTORY, FILE]
 
-    attr_reader :name, :path, :type
+    attr_reader :name, :type
 
-    # TODO path is basically useless here; the parent_name attribute is probably useless too, so
-    # the path object could be entirely removed from initialization params
-    def initialize(name, path)
+    def initialize(name)
       @name = name
-      @path = path
       @type = find_type
     end
 
-    def parent_name
-      path.name
-    end
-
     def as_json(opts={})
-      {'name' => name, 'type' => type, 'parent_name' => parent_name }
+      {'name' => name, 'type' => type}
     end
 
     private

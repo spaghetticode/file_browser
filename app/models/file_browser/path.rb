@@ -13,16 +13,8 @@ module FileBrowser
 
     def entries
       Dir.glob("#{name}/*").map do |entry_name|
-        Entry.new(entry_name, self)
+        Entry.new(entry_name)
       end
-    end
-
-    def full_entry_name(entry_name)
-      File.join name, entry_name
-    end
-
-    def entry_type(entry_name)
-      Entry.type(entry_name)
     end
   end
 end
