@@ -157,5 +157,6 @@ DEPENDENCIES
   file_browser!
   guard-rspec
   jquery-rails
+  pry
   rspec-rails
   sqlite3
