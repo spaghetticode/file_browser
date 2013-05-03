@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/kolo/handlebars-rails.git
+  revision: 58bd4c7d896bd711291fac0c7a0b43dcffd0c774
+  specs:
+    handlebars-rails (0.1)
+      sprockets (> 2.0.3)
+
+GIT
   remote: https://github.com/spaghetticode/fakefs.git
   revision: c64330126901b5e97665eddd86cc386aab383786
   specs:
@@ -176,8 +183,8 @@ DEPENDENCIES
   file_browser!
   guard-rspec
   haml
+  handlebars-rails!
   jquery-rails
-  pry
   rspec-rails
   sass-rails (~> 3.2)
   sqlite3
