@@ -4,10 +4,11 @@ module FileBrowser
     DIRECTORY = 'directory'
     TYPES     = [DIRECTORY, FILE]
 
-    attr_reader :name, :type, :ext
+    attr_reader :name, :type, :ext, :path
 
-    def initialize(name)
-      @name = name
+    def initialize(path)
+      @path = path
+      @name = get_name
       @type = get_type
       @ext  = get_ext
     end
@@ -19,14 +20,17 @@ module FileBrowser
     end
 
     def as_json(opts={})
-      {'name' => name, 'type' => type}
+      {'name' => name, 'type' => type, 'path' => path, 'ext' => ext}
     end
 
     private
 
+    def get_name
+      File.basename(path)
+    end
 
     def get_type
-      TYPES.detect { |type| File.send("#{type}?", name) }
+      TYPES.detect { |type| File.send("#{type}?", path) }
     end
 
     def get_ext

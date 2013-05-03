@@ -43,16 +43,16 @@ module FileBrowser
       end
 
       it 'finds directories under the path' do
-        entry_name = File.join(name, 'somedir')
-        create_dir entry_name
-        subject.entries.map(&:name).should include entry_name
+        entry_path = File.join(name, 'somedir')
+        create_dir entry_path
+        subject.entries.map(&:path).should include entry_path
       end
 
       it 'correctly sets the type of entry' do
 
-        entry_name = File.join(name, 'somedir')
-        create_dir entry_name
-        dir = subject.entries.detect { |e| e.name == entry_name }
+        entry_path = File.join(name, 'somedir')
+        create_dir entry_path
+        dir = subject.entries.detect { |e| e.path == entry_path }
         dir.type.should == Entry::DIRECTORY
       end
     end
