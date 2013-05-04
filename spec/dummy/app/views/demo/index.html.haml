@@ -1,0 +1,12 @@
+%h1 FileBrowser Demo
+
+%p
+  %a.trigger Click me to browse your filesystem
+
+= render '/file_browser/modal'
+
+:javascript
+  $('.trigger').click(function(event) {
+    event.preventDefault();
+    FileBrowser.Modal.init($('#file-browser'));
+  });
