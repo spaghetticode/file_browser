@@ -7,6 +7,10 @@ module FileBrowser
 
     before { create_dir name }
 
+    it { subject.should respond_to :file_list }
+    it { subject.should respond_to :entries }
+
+
     it 'has the root directory as base path name' do
       Path::BASE.should == '/'
     end
@@ -33,33 +37,43 @@ module FileBrowser
       expect { Path.new('bogus/path') }.to raise_error(Path::NotFoundError)
     end
 
-    it { subject.should respond_to :entries }
+    context 'when a directory exists under the path' do
+      let(:entry_path) { File.join(name, 'somedir') }
 
-    describe '#entries' do
-      it { subject.entries.should be_an Array }
+      before { create_dir entry_path }
 
-      it 'is a collection of entries' do
-        subject.entries.should be_all { |e| Entry === e }
+      describe '#file_list' do
+        context 'when name is not root' do
+          it 'parent dir is included in the list' do
+            subject.file_list.should include('..')
+          end
+        end
+
+        context 'when name is root' do
+          before { subject.stub(:root? => true) }
+
+          it 'parent dir is not included' do
+            subject.file_list.should_not include('..')
+          end
+        end
       end
 
-      it 'finds directories under the path' do
-        entry_path = File.join(name, 'somedir')
-        create_dir entry_path
-        subject.entries.map(&:path).should include entry_path
+      describe '#entries' do
+        it { subject.entries.should be_an Array }
+
+        it 'is a collection of entries' do
+          subject.entries.should be_all { |e| Entry === e }
+        end
+
+        it 'correctly sets the type of entry' do
+          dir = subject.entries.detect { |e| e.path == entry_path }
+          dir.type.should == Entry::DIRECTORY
+        end
       end
 
-      it 'correctly sets the type of entry' do
-
-        entry_path = File.join(name, 'somedir')
-        create_dir entry_path
-        dir = subject.entries.detect { |e| e.path == entry_path }
-        dir.type.should == Entry::DIRECTORY
+      it 'represents the name and entries in json format' do
+        subject.as_json.keys.should =~ %w[name entries]
       end
-    end
-
-    it 'represents the name and entries in json format' do
-      json_hash = {:name => name, :entries => []}.stringify_keys!
-      subject.as_json.should == json_hash
     end
   end
 end
