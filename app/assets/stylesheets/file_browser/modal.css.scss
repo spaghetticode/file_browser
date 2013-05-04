@@ -1,0 +1,32 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+#file-browser {
+  .modal-header {
+    .close {
+      margin-top: 13px;
+    }
+    input {
+      width: 93%;
+      display: block;
+      margin-top:10px;
+    }
+  }
+  .modal-body {
+    ul {
+      width: 90%;
+      height: 200px;
+      list-style-type: none;
+    }
+    .entry {
+      img {
+        padding: 3px 6px;
+      }
+      &.selected {
+        background: #99CCFF;
+      }
+    }
+  }
+}
