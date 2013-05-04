@@ -34,7 +34,7 @@ module FileBrowser
     end
 
     def get_ext
-      File.extname(name)[1..-1] if file?
+      File.extname(name).downcase if file?
     end
   end
 end

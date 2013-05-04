@@ -2,10 +2,10 @@ require 'spec_helper'
 
 module FileBrowser
   describe Entry do
-    let(:ext)       { 'jpg' }
+    let(:ext)       { '.jpg' }
     let(:root)      { 'root' }
     let(:dir_name)  { 'somedir' }
-    let(:file_name) { "picture.#{ext}" }
+    let(:file_name) { "picture#{ext}" }
     let(:dir_path)  { File.join root, dir_name }
     let(:file_path) { File.join root, file_name }
 
