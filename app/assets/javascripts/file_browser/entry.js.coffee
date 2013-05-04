@@ -1,5 +1,3 @@
-window.FileBrowser or= {}
-
 class FileBrowser.Entry
   @FILE      = 'file'
   @DIRECTORY = 'directory'

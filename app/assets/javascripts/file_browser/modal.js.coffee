@@ -1,4 +1,4 @@
-window.FileBrowser or= {}
+window.FileBrowser = {}
 
 class FileBrowser.Modal
   @init: (@element) ->

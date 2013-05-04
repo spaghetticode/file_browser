@@ -14,5 +14,7 @@
 //= require jquery_ujs
 //= require handlebars
 //= require bootstrap
+//= require ./modal
+//= require ./path
+//= require ./entry
 //= require_tree .
-
