@@ -7,12 +7,30 @@ module FileBrowser
 
     before { create_dir name }
 
-    it { subject.should respond_to :file_list }
-    it { subject.should respond_to :entries }
+    it { should respond_to :file_list }
+    it { should respond_to :entries }
+    it { should respond_to :base }
 
-
-    it 'has the root directory as base path name' do
+    it 'has the root directory as default base path' do
       Path::BASE.should == '/'
+    end
+
+    context 'when @@base is set' do
+      before { Path.base = name }
+
+      it '::base returns the expected value' do
+        Path.base.should == name
+      end
+
+      it 'base value is available also on instances' do
+        subject.base.should == name
+      end
+    end
+
+    context 'when @@base is not set' do
+      before { Path.base = nil }
+
+      it { Path.base.should == Path::BASE }
     end
 
     describe '::name_from_params' do
