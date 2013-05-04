@@ -2,9 +2,10 @@ require 'spec_helper'
 
 module FileBrowser
   describe PathsController do
-    describe '#show' do
+    describe '#create' do
+      before { Path.stub(:get_entries => [], :validate => true) }
       it 'is successful' do
-        get :show, :id => 'root', :format => :json
+        post :create, :id => 'root', :format => :json
         response.should be_success
       end
     end

@@ -1,3 +1,3 @@
 FileBrowser::Engine.routes.draw do
-  resources :paths, :only => :show
+  resources :paths, :only => :create
 end

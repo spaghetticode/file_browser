@@ -4,9 +4,10 @@ module FileBrowser
   class PathsController < ApplicationController
     respond_to :json
 
-    def show
+    def create
       @path = Path.new(path_name)
-      respond_with @path
+      # respond_with @path
+      render :json => @path
     end
 
     private
