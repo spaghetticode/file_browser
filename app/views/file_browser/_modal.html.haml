@@ -1,0 +1,9 @@
+#file-browser.modal.hide.fade
+  .modal-header
+    %button.close{:type=>"button", 'data-dismiss'=>"modal", 'aria-hidden'=>"true"}×
+    %input{:type => 'text', :disabled => 'disabled', :id => 'path', :name => 'path'}
+  .modal-body
+    %ul
+  .modal-footer
+    %button.btn{'data-dismiss'=>"modal", 'aria-hidden'=>"true"} Cancel
+    %button.btn.btn-primary Open
