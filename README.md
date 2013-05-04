@@ -1,7 +1,8 @@
 # FileBrowser
 
-This is a rails 3 engine that allows your to browse the filesystem via a modal window on the browser. It relies on twitter bootstrap modal javascript.
+This is a rails 3 engine that allows your to browse the filesystem via a modal window on the browser, simulating the operative system file open window. It relies on twitter bootstrap modal javascript.
 
+![modal example](https://raw.github.com/spaghetticode/file_browser/master/docs/modal.jpg "modal example")
 
 ## Demo
 
@@ -23,7 +24,7 @@ in your rails app application.js add:
 ```
 same goes in your rails app application.css:
 ```
-//= require file_browser/application
+*= require file_browser/application
 ```
 
 Include the modal html in any view of your application:
