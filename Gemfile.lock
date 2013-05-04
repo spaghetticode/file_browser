@@ -14,7 +14,7 @@ GIT
 PATH
   remote: .
   specs:
-    file_browser (0.0.1)
+    fs_browser (0.0.1)
       rails (~> 3.2.13)
 
 GEM
@@ -180,7 +180,7 @@ DEPENDENCIES
   capybara
   coffee-rails
   fakefs!
-  file_browser!
+  fs_browser!
   guard-rspec
   haml
   handlebars-rails!

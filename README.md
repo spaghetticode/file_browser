@@ -1,8 +1,8 @@
-# FileBrowser
+# FileSystem Browser
 
 This is a rails 3 engine that allows your to browse the filesystem via a modal window on the browser, simulating the operative system file open window. It relies on twitter bootstrap modal javascript.
 
-![modal example](https://raw.github.com/spaghetticode/file_browser/master/docs/modal.jpg "modal example")
+![modal example](https://raw.github.com/spaghetticode/fs_browser/master/docs/modal.jpg "modal example")
 
 ## Demo
 
@@ -14,7 +14,7 @@ You can view a demo of the modal window by starting the rails app in ```spec/dum
 Add the gem to your rails app Gemfile:
 
 ```ruby
-gem 'file_browser'
+gem 'fs_browser'
 ```
 
 Add the gem asset manifests:
