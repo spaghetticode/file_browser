@@ -1,0 +1,1 @@
+<li class="entry" data-type="{{type}}"><img src="{{icon}}" alt="">{{name}}</li>
