@@ -2,25 +2,31 @@ window.FileBrowser or= {}
 
 class FileBrowser.Path
   @tree = []
+  @separator = '/'
 
-  @get: (path='root') =>
+  @getJson: =>
     $.ajax
       type:     'POST'
       dataType: 'json'
       url:      '/file_browser/paths'
-      data:     {id: path}
+      data:     {id: @current()}
       success:  @build
 
+  @current: =>
+    if @tree.length then @tree.join(@separator) else 'root'
+
+  @parent: ->
+    @tree.pop()
+    @current()
+
   @build: (json) =>
-    @current = json.name
+    @tree.push json.name unless @tree.length
     FileBrowser.Entry.build(json.entries)
     FileBrowser.Dom.updateModal()
 
   @update: (entryName) ->
     if entryName is '..'
-      @tree.pop()
-      @current = @tree[@tree.length-1]
+      @parent()
     else
-      @current = "#{@current}#{entryName}/"
-      @tree.push @current
-    @get @current
+      @tree.push entryName
+    @getJson()

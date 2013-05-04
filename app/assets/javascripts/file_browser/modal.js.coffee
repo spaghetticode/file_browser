@@ -6,7 +6,7 @@ class FileBrowser.Modal
     @element.modal
       keyboard: true
       show:     false
-    @element.on 'show', -> FileBrowser.Path.get()
+    @element.on 'show', -> FileBrowser.Path.getJson()
     @element.modal 'show'
 
   @clearList: -> @list.html ''

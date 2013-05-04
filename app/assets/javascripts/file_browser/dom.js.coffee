@@ -3,7 +3,7 @@ window.FileBrowser or= {}
 class FileBrowser.Dom
   @updateModal: ->
     @buildEntryList()
-    @updatePath FileBrowser.Path.current
+    @updatePath()
 
   @buildEntryList: ->
     FileBrowser.Modal.clearList()
@@ -12,22 +12,27 @@ class FileBrowser.Dom
 
   @handleEntryClick: (entry) ->
       element = entry.element
-      element.click ->
-       $('.entry').removeClass('selected')
-       element.addClass('selected')
-       $('#path').val FileBrowser.Path.current + entry.name
+      element.click =>
+        $('.entry').removeClass('selected')
+        element.addClass('selected')
+        @updatePath entry.name
 
   @handleEntryDblClick: (entry) ->
     element = entry.element
-    element.dblclick ->
+    element.dblclick =>
       if entry.type is FileBrowser.Entry.DIRECTORY
         FileBrowser.Path.update entry.name
-        FileBrowser.Dom.updatePath FileBrowser.Path.current
+        @updatePath()
       else
         alert entry.type
 
-   @buildEntryElement: (entry) ->
+  @buildEntryElement: (entry) ->
     $(JST['file_browser/templates/file_browser/entry'](entry))
 
-  @updatePath: (path) ->
-    $('#path').val path
+  @updatePath: (name) ->
+    dirty = [@currentPath(), name].join @separator()
+    clean = dirty.replace new RegExp("#{@separator()}#{@separator()}"), @separator()
+    $('#path').val clean
+
+  @currentPath: -> FileBrowser.Path.current()
+  @separator : -> FileBrowser.Path.separator
