@@ -44,8 +44,8 @@ class FileBrowser.Entry
   _inArray: (name) ->
     @constructor[name].indexOf(@extChars()) >= 0
 
-  _bindClick: -> FileBrowser.Dom.handleEntryClick(@)
+  _bindClick: -> FileBrowser.Modal.handleEntryClick(@)
 
-  _bindDblClick: -> FileBrowser.Dom.handleEntryDblClick(@)
+  _bindDblClick: -> FileBrowser.Modal.handleEntryDblClick(@)
 
-  _buildElement: -> FileBrowser.Dom.buildEntryElement(@)
+  _buildElement: -> FileBrowser.Modal.buildEntryElement(@)

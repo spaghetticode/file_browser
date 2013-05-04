@@ -3,10 +3,12 @@ module FileBrowser
     class NotFoundError < Exception; end
     BASE = '/'
 
-    cattr_accessor :base
+    class << self
+      attr_writer :base
 
-    def self.base
-      @@base || BASE
+      def base
+        @base ||= BASE
+      end
     end
 
     attr_reader :name, :entries
@@ -36,6 +38,10 @@ module FileBrowser
 
     def root?
       name == base
+    end
+
+    def base
+      self.class.base
     end
 
     def validate(name)

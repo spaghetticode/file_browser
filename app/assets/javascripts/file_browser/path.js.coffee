@@ -22,7 +22,7 @@ class FileBrowser.Path
   @build: (json) =>
     @tree.push json.name unless @tree.length
     FileBrowser.Entry.build(json.entries)
-    FileBrowser.Dom.updateModal()
+    FileBrowser.Modal.update()
 
   @update: (entryName) ->
     if entryName is '..'
