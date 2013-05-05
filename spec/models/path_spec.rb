@@ -37,7 +37,7 @@ module FsBrowser
       context 'when params[:id] is root' do
         it 'is the base path name when params[:id] is root' do
           params = {:id => 'root'}
-          Path.name_from_params(params).should == Path::BASE
+          Path.name_from_params(params).should == Path.base
         end
       end
 
@@ -62,6 +62,8 @@ module FsBrowser
 
       describe '#file_list' do
         context 'when name is not root' do
+          before { subject.stub(:root? => false) }
+
           it 'parent dir is included in the list' do
             subject.file_list.should include('..')
           end
