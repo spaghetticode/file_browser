@@ -51,7 +51,7 @@ the following code:
 FsBrowser::Path.base = '/some/other/path'
 ```
 
+
 # TODO
 
-* Add Integration tests
 * Check workings on windows
