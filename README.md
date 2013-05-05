@@ -12,10 +12,14 @@ You can view a demo of the modal window by starting the rails app in ```spec/dum
 ## Usage
 
 Add the gem to your rails app Gemfile:
-
 ```ruby
 gem 'fs_browser'
 ```
+and run the bundle command:
+```bash
+bundle
+```
+
 
 Add the gem asset manifests:
 in your rails app application.js add:
@@ -37,8 +41,17 @@ To start the modal window use the following javascript code:
 FsBrowser.Modal.init();
 ```
 
+
+## Configuration
+
+The default starting path for the modal window is the root path of the filesystem ("/").
+You can customise the behaviour adding an initializer in your app ```config``` directory with
+the following code:
+```ruby
+FsBrowser::Path.base = '/some/other/path'
+```
+
 # TODO
 
-* Integration testing
-* Add configuration for start path
+* Add Integration tests
 * Check workings on windows
