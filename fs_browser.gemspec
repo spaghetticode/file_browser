@@ -13,12 +13,14 @@ Gem::Specification.new do |s|
   s.summary     = 'rails 3 engine to create a modal window to browse the server file system'
   s.description = 'rails 3 engine to create a modal window to browse the server file system'
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
+  s.files      = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
+  s.test_files = Dir["spec/**/*"]
 
   s.add_dependency "rails", "~> 3.2.13"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "capybara"
+  s.add_development_dependency "selenium-webdriver"
   s.add_development_dependency "guard-rspec"
 end
