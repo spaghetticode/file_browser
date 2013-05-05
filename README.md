@@ -1,4 +1,4 @@
-# FileSystem Browser
+# Filesystem Browser
 
 This is a rails 3 engine that allows your to browse the filesystem via a modal window on the browser, simulating the operative system file open window. It relies on twitter bootstrap modal javascript.
 
@@ -34,7 +34,7 @@ Include the modal html in any view of your application:
 
 To start the modal window use the following javascript code:
 ```js
-FsBrowser.Modal.init($('#fs-browser'));
+FsBrowser.Modal.init();
 ```
 
 # TODO

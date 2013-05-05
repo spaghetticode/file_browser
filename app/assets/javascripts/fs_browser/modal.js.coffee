@@ -1,7 +1,7 @@
 window.FsBrowser = {}
 
 class FsBrowser.Modal
-  @init: (@element) ->
+  @init: (@element=$('#fs-browser')) ->
     @list = @element.find('ul')
     @element.modal
       keyboard: true
