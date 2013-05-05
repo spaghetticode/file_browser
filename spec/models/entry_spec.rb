@@ -2,6 +2,8 @@ require 'spec_helper'
 
 module FsBrowser
   describe Entry do
+    include FakeFS::SpecHelpers
+
     let(:ext)       { '.jpg' }
     let(:root)      { 'root' }
     let(:dir_name)  { 'somedir' }

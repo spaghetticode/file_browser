@@ -2,6 +2,8 @@ require 'spec_helper'
 
 module FsBrowser
   describe Path do
+    include FakeFS::SpecHelpers
+
     let(:name) { 'tempdir' }
     subject { Path.new(name) }
 
