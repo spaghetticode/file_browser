@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module FileBrowser
+module FsBrowser
   describe Entry do
     let(:ext)       { '.jpg' }
     let(:root)      { 'root' }

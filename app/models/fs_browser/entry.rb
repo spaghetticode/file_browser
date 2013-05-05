@@ -1,4 +1,4 @@
-module FileBrowser
+module FsBrowser
   class Entry
     FILE      = 'file'
     DIRECTORY = 'directory'

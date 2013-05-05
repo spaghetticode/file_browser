@@ -9,7 +9,7 @@ require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
 Bundler.require(*Rails.groups)
-require "file_browser"
+require "fs_browser"
 
 module Dummy
   class Application < Rails::Application

@@ -13,4 +13,4 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-//= require file_browser/application
+//= require fs_browser/application

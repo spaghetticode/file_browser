@@ -1,12 +1,12 @@
-window.FileBrowser = {}
+window.FsBrowser = {}
 
-class FileBrowser.Modal
+class FsBrowser.Modal
   @init: (@element) ->
     @list = @element.find('ul')
     @element.modal
       keyboard: true
       show:     false
-    @element.on 'show', -> FileBrowser.Path.getJson()
+    @element.on 'show', -> FsBrowser.Path.getJson()
     @element.modal 'show'
 
   @clearList: -> @list.html ''
@@ -17,7 +17,7 @@ class FileBrowser.Modal
 
   @buildEntryList: ->
     @clearList()
-    for entry in FileBrowser.Entry.all
+    for entry in FsBrowser.Entry.all
       @list.append(entry.element)
 
   @handleEntryClick: (entry) ->
@@ -30,19 +30,19 @@ class FileBrowser.Modal
   @handleEntryDblClick: (entry) ->
     element = entry.element
     element.dblclick =>
-      if entry.type is FileBrowser.Entry.DIRECTORY
-        FileBrowser.Path.update entry.name
+      if entry.type is FsBrowser.Entry.DIRECTORY
+        FsBrowser.Path.update entry.name
         @updatePath()
       else
         alert entry.type
 
   @buildEntryElement: (entry) ->
-    $(JST['file_browser/templates/file_browser/entry'](entry))
+    $(JST['fs_browser/templates/fs_browser/entry'](entry))
 
   @updatePath: (name) ->
     dirty = [@currentPath(), name].join @separator()
     clean = dirty.replace new RegExp("#{@separator()}#{@separator()}"), @separator()
     $('#path').val clean
 
-  @currentPath: -> FileBrowser.Path.current()
-  @separator : -> FileBrowser.Path.separator
+  @currentPath: -> FsBrowser.Path.current()
+  @separator : -> FsBrowser.Path.separator

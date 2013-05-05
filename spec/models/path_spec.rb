@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module FileBrowser
+module FsBrowser
   describe Path do
     let(:name) { 'tempdir' }
     subject { Path.new(name) }

@@ -1,4 +1,4 @@
-module FileBrowser
+module FsBrowser
   class Path
     class NotFoundError < Exception; end
     BASE = '/'

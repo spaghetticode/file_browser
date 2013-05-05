@@ -1,4 +1,4 @@
-class FileBrowser.Entry
+class FsBrowser.Entry
   @FILE      = 'file'
   @DIRECTORY = 'directory'
   @FLASH     = ['flv', 'swf']
@@ -28,7 +28,7 @@ class FileBrowser.Entry
   isDirectory: -> @type is @constructor.DIRECTORY
   extChars:    -> if @ext then @ext[1..] else 'unk'
 
-  _getIcon: -> "/assets/file_browser/file_icons/#{@_iconName()}.png"
+  _getIcon: -> "/assets/fs_browser/file_icons/#{@_iconName()}.png"
 
   _iconName: ->
     return 'folder'    if @isDirectory()
@@ -42,8 +42,8 @@ class FileBrowser.Entry
   _inArray: (name) ->
     @constructor[name].indexOf(@extChars()) >= 0
 
-  _bindClick: -> FileBrowser.Modal.handleEntryClick(@)
+  _bindClick: -> FsBrowser.Modal.handleEntryClick(@)
 
-  _bindDblClick: -> FileBrowser.Modal.handleEntryDblClick(@)
+  _bindDblClick: -> FsBrowser.Modal.handleEntryDblClick(@)
 
-  _buildElement: -> FileBrowser.Modal.buildEntryElement(@)
+  _buildElement: -> FsBrowser.Modal.buildEntryElement(@)

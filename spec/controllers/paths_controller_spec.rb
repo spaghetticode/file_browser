@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module FileBrowser
+module FsBrowser
   describe PathsController do
     describe '#create' do
       before { Path.stub(:get_entries => [], :validate => true) }

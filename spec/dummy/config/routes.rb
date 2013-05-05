@@ -2,5 +2,5 @@ Rails.application.routes.draw do
   get 'demo/index'
   root to: 'demo#index'
 
-  mount FileBrowser::Engine => "/file_browser"
+  mount FsBrowser::Engine => "/fs_browser"
 end

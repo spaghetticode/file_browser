@@ -1,6 +1,6 @@
-require_dependency "file_browser/application_controller"
+require_dependency "fs_browser/application_controller"
 
-module FileBrowser
+module FsBrowser
   class PathsController < ApplicationController
     respond_to :json
 

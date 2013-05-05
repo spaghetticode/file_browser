@@ -1,4 +1,4 @@
-class FileBrowser.Path
+class FsBrowser.Path
   @tree = []
   @separator = '/'
 
@@ -6,7 +6,7 @@ class FileBrowser.Path
     $.ajax
       type:     'POST'
       dataType: 'json'
-      url:      '/file_browser/paths'
+      url:      '/fs_browser/paths'
       data:     {id: @current()}
       success:  @build
 
@@ -19,8 +19,8 @@ class FileBrowser.Path
 
   @build: (json) =>
     @tree.push json.name unless @tree.length
-    FileBrowser.Entry.build(json.entries)
-    FileBrowser.Modal.update()
+    FsBrowser.Entry.build(json.entries)
+    FsBrowser.Modal.update()
 
   @update: (entryName) ->
     if entryName is '..'

@@ -20,21 +20,21 @@ gem 'fs_browser'
 Add the gem asset manifests:
 in your rails app application.js add:
 ```
-//= require file_browser/application
+//= require fs_browser/application
 ```
 same goes in your rails app application.css:
 ```
-*= require file_browser/application
+*= require fs_browser/application
 ```
 
 Include the modal html in any view of your application:
 ```ruby
-<%= render 'file_browser/modal' %>
+<%= render 'fs_browser/modal' %>
 ```
 
 To start the modal window use the following javascript code:
 ```js
-FileBrowser.Modal.init($('#file-browser'));
+FsBrowser.Modal.init($('#fs-browser'));
 ```
 
 # TODO
