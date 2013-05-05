@@ -9,4 +9,9 @@ module SpecHelpers
     create_dir(dir)
     FileUtils.touch(filename)
   end
+
+  def double_click(text)
+    element = page.find(:xpath,"//a[contains(.,'#{text}')]")
+    page.driver.browser.mouse.double_click(element.native)
+  end
 end

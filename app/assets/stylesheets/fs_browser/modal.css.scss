@@ -27,6 +27,11 @@
       &.selected {
         background: #99CCFF;
       }
+      a {
+        text-decoration: none;
+        color: black;
+        cursor: default;
+      }
     }
   }
 }

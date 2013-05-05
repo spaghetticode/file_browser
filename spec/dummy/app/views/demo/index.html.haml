@@ -1,7 +1,8 @@
 %h1 FsBrowser Demo
 
 %p
-  %a.trigger Click me to browse your filesystem
+  = link_to 'Click me', '#', :class => 'trigger'
+  to browse your filesystem
 
 = render '/fs_browser/modal'
 
