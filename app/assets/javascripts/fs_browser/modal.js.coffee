@@ -33,8 +33,6 @@ class FsBrowser.Modal
       if entry.type is FsBrowser.Entry.DIRECTORY
         FsBrowser.Path.update entry.name
         @updatePath()
-      else
-        alert entry.type
 
   @buildEntryElement: (entry) ->
     $(JST['fs_browser/templates/fs_browser/entry'](entry))
