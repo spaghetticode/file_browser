@@ -5,9 +5,14 @@ module FsBrowser
     include FakeFS::SpecHelpers
 
     let(:name) { 'tempdir' }
+    let(:base) { name }
+
     subject { Path.new(name) }
 
-    before { create_dir name }
+    before do
+      create_dir name
+      Path.base = base
+    end
 
     it { should respond_to :file_list }
     it { should respond_to :entries }
@@ -17,7 +22,7 @@ module FsBrowser
       Path::BASE.should == '/'
     end
 
-    context 'when @@base is set' do
+    context 'when base is set' do
       before { Path.base = name }
 
       it '::base returns the expected value' do
@@ -29,7 +34,7 @@ module FsBrowser
       end
     end
 
-    context 'when @@base is not set' do
+    context 'when base is not set' do
       before { Path.base = nil }
 
       it { Path.base.should == Path::BASE }
@@ -55,6 +60,18 @@ module FsBrowser
 
     it 'requires an existing path' do
       expect { Path.new('bogus/path') }.to raise_error(Path::NotFoundError)
+    end
+
+    describe '#validate' do
+      context 'when the path name is above the base path' do
+        before do
+          subject.instance_variable_set('@name', '/')
+        end
+
+        it 'raises error' do
+          expect { subject.validate }.to raise_error(FsBrowser::Path::ParentError)
+        end
+      end
     end
 
     context 'when a directory exists under the path' do

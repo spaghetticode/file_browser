@@ -1,6 +1,8 @@
 module FsBrowser
   class Path
     class NotFoundError < Exception; end
+    class ParentError   < Exception; end
+
     BASE = '/'
 
     class << self
@@ -19,8 +21,8 @@ module FsBrowser
     end
 
     def initialize(name)
-      validate(name)
-      @name    = name
+      @name = name
+      validate
       @entries = get_entries
     end
 
@@ -44,8 +46,12 @@ module FsBrowser
       self.class.base
     end
 
-    def validate(name)
+    def validate
       raise NotFoundError unless File.exists?(name)
+      # TODO use pathnames instead of strings all around in Path and Entry classes
+      full_name = File.expand_path(name)
+      full_base = File.expand_path(base)
+      raise ParentError unless full_name =~ /\A#{full_base}/
     end
   end
 end
