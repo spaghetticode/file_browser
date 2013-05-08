@@ -1,8 +1,8 @@
 class FsBrowser.Callbacks
-  @entryClick: (entry) ->
+  @entryClick: (event, entry) ->
     console.log "clicked on #{entry.name}"
 
-  @entryDblClick: (entry) ->
+  @entryDblClick: (event, entry) ->
     console.log "double clicked on file #{entry.name}"
 
   @modalSubmit: (event) ->

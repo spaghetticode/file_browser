@@ -10,7 +10,7 @@ class FsBrowser.Modal
     @element.on 'show', =>
       FsBrowser.Path.getJson()
       @submit.off('click.modal_submit').on 'click.modal_submit', =>
-        FsBrowser.Callbacks.modalSubmit()
+        FsBrowser.Callbacks.modalSubmit(event)
 
     @element.modal 'show'
 
@@ -31,7 +31,7 @@ class FsBrowser.Modal
         $('.entry').removeClass('selected')
         element.addClass('selected')
         @updatePath entry.name
-        FsBrowser.Callbacks.entryClick(entry)
+        FsBrowser.Callbacks.entryClick(event, entry)
 
   @handleEntryDblClick: (entry) ->
     element = entry.element
@@ -39,7 +39,7 @@ class FsBrowser.Modal
       if entry.type is FsBrowser.Entry.DIRECTORY
         FsBrowser.Path.update entry.name
         @updatePath()
-      FsBrowser.Callbacks.entryDblClick(entry)
+      FsBrowser.Callbacks.entryDblClick(event, entry)
 
   @buildEntryElement: (entry) ->
     $(JST['fs_browser/templates/fs_browser/entry'](entry))

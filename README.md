@@ -42,6 +42,18 @@ FsBrowser.Modal.init();
 ```
 
 
+## Event Callbacks
+
+There are a few builtin callbacks available when interacting with the modal window:
+
+* single click on a filesystem entry triggers ```FsBrowser.Callbacks.entryClick(event, entry)```
+* double click on a filesystem entry triggers ```FsBrowser.Callbacks.entryDblClick(event, entry)```
+* click on the submit button triggers ```FsBrowser.Callbacks.modalSubmit(event)```
+
+There are simple defaults for these callbacks that just log in the browser console.
+Customize them by overriding methods in ```app/assets/fs_browser/callbacks.js.coffee```
+
+
 ## Configuration
 
 The default starting path for the modal window is the root path of the filesystem ("/").
