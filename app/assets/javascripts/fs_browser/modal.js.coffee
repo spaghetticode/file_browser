@@ -2,11 +2,16 @@ window.FsBrowser = {}
 
 class FsBrowser.Modal
   @init: (@element=$('#fs-browser')) ->
-    @list = @element.find('ul')
+    @list   = @element.find('ul')
+    @submit = @element.find('button.btn-primary')
     @element.modal
       keyboard: true
       show:     false
-    @element.on 'show', -> FsBrowser.Path.getJson()
+    @element.on 'show', =>
+      FsBrowser.Path.getJson()
+      @submit.off('click.modal_submit').on 'click.modal_submit', =>
+        FsBrowser.Callbacks.modalSubmit()
+
     @element.modal 'show'
 
   @clearList: -> @list.html ''
@@ -26,6 +31,7 @@ class FsBrowser.Modal
         $('.entry').removeClass('selected')
         element.addClass('selected')
         @updatePath entry.name
+        FsBrowser.Callbacks.entryClick(entry)
 
   @handleEntryDblClick: (entry) ->
     element = entry.element
@@ -33,6 +39,7 @@ class FsBrowser.Modal
       if entry.type is FsBrowser.Entry.DIRECTORY
         FsBrowser.Path.update entry.name
         @updatePath()
+      FsBrowser.Callbacks.entryDblClick(entry)
 
   @buildEntryElement: (entry) ->
     $(JST['fs_browser/templates/fs_browser/entry'](entry))
