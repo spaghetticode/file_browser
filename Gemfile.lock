@@ -5,12 +5,6 @@ GIT
     handlebars-rails (0.1)
       sprockets (> 2.0.3)
 
-GIT
-  remote: https://github.com/spaghetticode/fakefs.git
-  revision: c64330126901b5e97665eddd86cc386aab383786
-  specs:
-    fakefs (0.4.2)
-
 PATH
   remote: .
   specs:
@@ -189,7 +183,6 @@ DEPENDENCIES
   bootstrap-sass (~> 2.3.1.0)
   capybara
   coffee-rails
-  fakefs!
   fs_browser!
   guard-rspec
   haml

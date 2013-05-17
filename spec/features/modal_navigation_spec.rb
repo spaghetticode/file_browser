@@ -7,25 +7,25 @@ feature 'filesystem modal window', :type => :feature, :js => true do
   end
 
   background do
-    FsBrowser::Path.base = Rails.root.to_s
+    FsBrowser::Path.base = Rails.root.join('spec/fixtures/filesystem/').to_s
     visit '/'
     click_link 'Click me'
   end
 
   scenario 'shows the modal window' do
-    modal_window.should have_content 'app'
-    modal_window.should have_content 'lib'
+    modal_window.should have_content 'folder'
+    modal_window.should have_content 'file.txt'
   end
 
   scenario 'can browse the filesystem tree' do
-    double_click 'lib'
-    modal_window.should have_content 'assets'
+    double_click 'folder'
+    modal_window.should have_content 'example.txt'
   end
 
   scenario 'can browse the filesystem backwards' do
-    double_click 'lib'
+    double_click 'folder'
     double_click '..'
-    modal_window.should_not have_content 'assets'
-    modal_window.should have_content 'lib'
+    modal_window.should_not have_content 'example.txt'
+    modal_window.should have_content 'file.txt'
   end
 end

@@ -2,23 +2,18 @@ require 'spec_helper'
 
 module FsBrowser
   describe Path do
-    include FakeFS::SpecHelpers
-
-    let(:name) { 'tempdir' }
+    let(:name) { Rails.root.join 'spec/fixtures/filesystem' }
     let(:base) { name }
 
     subject { Path.new(name) }
 
-    before do
-      create_dir name
-      Path.base = base
-    end
+    before { Path.base = base }
 
     it { should respond_to :file_list }
     it { should respond_to :entries }
     it { should respond_to :base }
 
-    it 'has the root directory as default base path' do
+    it 'has the root directory as default constant base path' do
       Path::BASE.should == '/'
     end
 
@@ -75,9 +70,7 @@ module FsBrowser
     end
 
     context 'when a directory exists under the path' do
-      let(:entry_path) { File.join(name, 'somedir') }
-
-      before { create_dir entry_path }
+      let(:entry_path) { File.join(name, 'folder') }
 
       describe '#file_list' do
         context 'when name is not root' do

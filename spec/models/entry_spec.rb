@@ -2,21 +2,14 @@ require 'spec_helper'
 
 module FsBrowser
   describe Entry do
-    include FakeFS::SpecHelpers
-
-    let(:ext)       { '.jpg' }
-    let(:root)      { 'root' }
-    let(:dir_name)  { 'somedir' }
-    let(:file_name) { "picture#{ext}" }
+    let(:ext)       { '.txt' }
+    let(:dir_name)  { 'folder' }
+    let(:file_name) { "file#{ext}" }
+    let(:root)      { Rails.root.join('spec/fixtures/filesystem') }
     let(:dir_path)  { File.join root, dir_name }
     let(:file_path) { File.join root, file_name }
 
-    subject         { Entry.new(dir_path) }
-
-    before do
-      create_dir  dir_path
-      create_file file_path
-    end
+    subject { Entry.new(dir_path) }
 
     it { subject.should respond_to :name }
     it { subject.should respond_to :type }
