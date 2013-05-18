@@ -50,12 +50,9 @@ module FsBrowser
 
     describe '#validate' do
       context 'when the path name is above the root path' do
-        before do
-          subject.instance_variable_set '@pathname', Pathname.new('/')
-        end
 
         it 'raises error' do
-          expect { subject.validate }.to raise_error(FsBrowser::Path::ParentError)
+          expect { Path.new( '/') }.to raise_error(FsBrowser::Path::ParentError)
         end
       end
     end
@@ -77,6 +74,24 @@ module FsBrowser
 
           it 'parent dir is not included' do
             subject.file_list.should_not include('..')
+          end
+        end
+      end
+
+      describe '#children' do
+        it 'delegates to realpath' do
+          subject.realpath.should_receive(:children)
+          subject.children
+        end
+
+        context 'when user has no read access to folder' do
+          it 'returns an empty array' do
+            begin
+              File.chmod(0333, fixtures_filesystem_path)
+              subject.children.should == []
+            ensure
+              File.chmod(0755, fixtures_filesystem_path)
+            end
           end
         end
       end

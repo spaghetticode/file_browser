@@ -35,8 +35,14 @@ module FsBrowser
       end
     end
 
+    def children
+      realpath.children
+    rescue Errno::EACCES
+      []
+    end
+
     def file_list
-      list = realpath.children
+      list = children
       list.unshift Pathname.new('..') unless root?
       list
     end
@@ -54,7 +60,7 @@ module FsBrowser
     end
 
     def realpath
-      begin
+      @realpath ||= begin
         pathname.realpath
       rescue Errno::ENOENT
         raise NotFoundError
