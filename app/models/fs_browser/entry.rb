@@ -1,19 +1,18 @@
 module FsBrowser
   class Entry
-    attr_reader :name, :type, :ext, :path, :pathname
+    attr_reader :name, :ext, :path, :pathname
 
-    delegate :file?, :directory?, :to => :pathname
+    delegate :file?, :directory?, :ftype, :to => :pathname
 
     def initialize(path)
-      @pathname = Pathname.new(path)
       @path = path
+      @pathname = Pathname.new(path)
       @name = @pathname.basename.to_s
-      @type = @pathname.ftype
       @ext  = @pathname.extname.downcase
     end
 
     def as_json(opts={})
-      {'name' => name, 'type' => type, 'path' => path, 'ext' => ext}
+      {'name' => name, 'type' => ftype, 'path' => path, 'ext' => ext}
     end
   end
 end
