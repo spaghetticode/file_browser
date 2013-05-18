@@ -3,7 +3,7 @@ require 'spec_helper'
 module FsBrowser
   describe PathsController do
     describe '#create' do
-      before { Path.base = '/' }
+      before { Path.root = '/' }
 
       it 'is successful' do
         post :create, :id => '', :format => :json

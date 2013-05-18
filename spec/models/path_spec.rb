@@ -3,44 +3,44 @@ require 'spec_helper'
 module FsBrowser
   describe Path do
     let(:name) { fixtures_filesystem_path }
-    let(:base) { name }
+    let(:root) { name }
 
     subject { Path.new(name) }
 
-    before { Path.base = base }
+    before { Path.root = root }
 
     it { should respond_to :file_list }
     it { should respond_to :pathname }
     it { should respond_to :entries }
-    it { should respond_to :base }
+    it { should respond_to :root }
 
-    it 'has the root directory as default constant base path' do
-      Path::BASE.should == '/'
+    it 'has the root directory as default constant root path' do
+      Path::ROOT.should == '/'
     end
 
-    context 'when base is set' do
-      before { Path.base = name }
+    context 'when root is set' do
+      before { Path.root = root }
 
-      it '::base returns the expected value' do
-        Path.base.should == name
+      it '::root returns the expected value' do
+        Path.root.should == root
       end
 
-      it 'base value is available also on instances' do
-        subject.base.should == name
+      it 'root value is available also on instances' do
+        subject.root.should == Path.root
       end
     end
 
-    context 'when base is not set' do
-      before { Path.base = nil }
+    context 'when root is not set' do
+      before { Path.root = nil }
 
-      it { Path.base.should == Path::BASE }
+      it { Path.root.should == Path::ROOT }
     end
 
     describe '::name_from_params' do
       context 'when params[:id] is empty' do
-        it 'is the base path name' do
+        it 'is the root path name' do
           params = {:id => ''}
-          Path.name_from_params(params).should == Path.base
+          Path.name_from_params(params).should == Path.root
         end
       end
 
@@ -59,7 +59,7 @@ module FsBrowser
     end
 
     describe '#validate' do
-      context 'when the path name is above the base path' do
+      context 'when the path name is above the root path' do
         before do
           subject.instance_variable_set '@pathname', Pathname.new('/')
         end

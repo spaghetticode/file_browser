@@ -3,13 +3,13 @@ module FsBrowser
     class NotFoundError < Exception; end
     class ParentError   < Exception; end
 
-    BASE = '/'
+    ROOT = '/'
 
     class << self
-      attr_writer :base
+      attr_writer :root
 
-      def base
-        @base ||= BASE
+      def root
+        @root ||= ROOT
       end
     end
 
@@ -17,7 +17,7 @@ module FsBrowser
 
     def self.name_from_params(params)
       name = params[:id]
-      name.present? ? name : base
+      name.present? ? name : root
     end
 
     def initialize(name)
@@ -44,18 +44,18 @@ module FsBrowser
     end
 
     def root?
-      name == base
+      name == root
     end
 
-    def base
-      self.class.base
+    def root
+      self.class.root
     end
 
     def validate
       raise NotFoundError unless pathname.exist?
       full_name = pathname.realpath.to_s
-      full_base = File.expand_path(base)
-      raise ParentError unless full_name =~ /\A#{full_base}/
+      full_root = File.expand_path(root)
+      raise ParentError unless full_name =~ /\A#{full_root}/
     end
   end
 end

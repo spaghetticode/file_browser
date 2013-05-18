@@ -60,7 +60,7 @@ The default starting path for the modal window is the root path of the filesyste
 You can customise the behaviour adding an initializer in your app ```config``` directory with
 the following code:
 ```ruby
-FsBrowser::Path.base = '/some/other/path'
+FsBrowser::Path.root = '/some/other/path'
 ```
 
 
