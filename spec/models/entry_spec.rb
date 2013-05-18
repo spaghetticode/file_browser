@@ -18,6 +18,8 @@ module FsBrowser
     it { subject.should respond_to :type }
     it { subject.should respond_to :file? }
     it { subject.should respond_to :directory? }
+    it { subject.should respond_to :realpath }
+    it { subject.should respond_to :exist? }
 
     it 'represents the name, type and ext in json format' do
       json_hash = {
