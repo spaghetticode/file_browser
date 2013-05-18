@@ -5,15 +5,9 @@ module FsBrowser
     respond_to :json
 
     def create
-      @path = Path.new(path_name)
+      @path = Path.new(params[:id])
       # respond_with @path
       render :json => @path
-    end
-
-    private
-
-    def path_name
-      Path.name_from_params(params)
     end
   end
 end

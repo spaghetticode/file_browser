@@ -11,7 +11,11 @@ class FsBrowser.Path
       success:  @build
 
   @current: =>
-    if @tree.length then @tree.join(@separator) else ''
+    if @tree.length then @relativePath() else ''
+
+  @relativePath: ->
+    path = @tree.join(@separator)
+    if path[0] is '/' then path[1..] else path
 
   @parent: ->
     @tree.pop()
