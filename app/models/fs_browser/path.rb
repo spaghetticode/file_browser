@@ -13,7 +13,7 @@ module FsBrowser
       end
     end
 
-    attr_reader :name, :entries
+    attr_reader :name, :entries, :pathname
 
     def self.name_from_params(params)
       name = params[:id]
@@ -22,6 +22,7 @@ module FsBrowser
 
     def initialize(name)
       @name = name
+      @pathname = Pathname.new(name)
       validate
       @entries = get_entries
     end
@@ -38,6 +39,10 @@ module FsBrowser
       list
     end
 
+    def as_json(opts={})
+      {'name' => name, 'entries' => entries}
+    end
+
     def root?
       name == base
     end
@@ -47,9 +52,8 @@ module FsBrowser
     end
 
     def validate
-      raise NotFoundError unless File.exists?(name)
-      # TODO use pathnames instead of strings all around in Path and Entry classes
-      full_name = File.expand_path(name)
+      raise NotFoundError unless pathname.exist?
+      full_name = pathname.realpath.to_s
       full_base = File.expand_path(base)
       raise ParentError unless full_name =~ /\A#{full_base}/
     end

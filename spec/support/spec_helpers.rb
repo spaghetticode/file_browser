@@ -1,13 +1,6 @@
 module SpecHelpers
-  def create_dir(dirname)
-    FileUtils.mkdir_p dirname
-  end
-
-  def create_file(filename)
-    name = File.basename(filename)
-    dir  = filename[0..filename.rindex(name)]
-    create_dir(dir)
-    FileUtils.touch(filename)
+  def fixtures_filesystem_path
+    Rails.root.join('../../spec/fixtures/filesystem').to_s
   end
 
   def double_click(text)

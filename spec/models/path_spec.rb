@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module FsBrowser
   describe Path do
-    let(:name) { Rails.root.join 'spec/fixtures/filesystem' }
+    let(:name) { fixtures_filesystem_path }
     let(:base) { name }
 
     subject { Path.new(name) }
@@ -10,6 +10,7 @@ module FsBrowser
     before { Path.base = base }
 
     it { should respond_to :file_list }
+    it { should respond_to :pathname }
     it { should respond_to :entries }
     it { should respond_to :base }
 
@@ -60,7 +61,7 @@ module FsBrowser
     describe '#validate' do
       context 'when the path name is above the base path' do
         before do
-          subject.instance_variable_set('@name', '/')
+          subject.instance_variable_set '@pathname', Pathname.new('/')
         end
 
         it 'raises error' do

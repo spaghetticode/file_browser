@@ -6,7 +6,7 @@ feature 'filesystem modal window', :type => :feature, :js => true do
   end
 
   background do
-    FsBrowser::Path.base = Rails.root.join('spec/fixtures/filesystem/').to_s
+    FsBrowser::Path.base = fixtures_filesystem_path
     visit '/'
     click_link 'Click me'
   end
