@@ -1,4 +1,3 @@
-require 'pry'
 require 'spec_helper'
 
 feature 'filesystem modal window', :type => :feature, :js => true do

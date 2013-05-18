@@ -1,40 +1,19 @@
 module FsBrowser
   class Entry
-    FILE      = 'file'
-    DIRECTORY = 'directory'
-    TYPES     = [DIRECTORY, FILE]
+    attr_reader :name, :type, :ext, :path, :pathname
 
-    attr_reader :name, :type, :ext, :path
+    delegate :file?, :directory?, :to => :pathname
 
     def initialize(path)
+      @pathname = Pathname.new(path)
       @path = path
-      @name = get_name
-      @type = get_type
-      @ext  = get_ext
-    end
-
-    TYPES.each do |method_name|
-      define_method "#{method_name}?" do
-        self.class.const_get("#{method_name}".upcase) == type
-      end
+      @name = @pathname.basename.to_s
+      @type = @pathname.ftype
+      @ext  = @pathname.extname.downcase
     end
 
     def as_json(opts={})
       {'name' => name, 'type' => type, 'path' => path, 'ext' => ext}
-    end
-
-    private
-
-    def get_name
-      File.basename(path)
-    end
-
-    def get_type
-      TYPES.detect { |type| File.send("#{type}?", path) }
-    end
-
-    def get_ext
-      File.extname(name).downcase if file?
     end
   end
 end

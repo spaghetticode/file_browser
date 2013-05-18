@@ -17,23 +17,19 @@ module FsBrowser
     it { subject.should respond_to :file? }
     it { subject.should respond_to :directory? }
 
-    it 'has only file and directory types' do
-      Entry::TYPES.should == [Entry::DIRECTORY, Entry::FILE]
-    end
-
     it 'represents the name, path, type and ext in json format' do
       json_hash = {
         :path => dir_path,
-        :type => Entry::DIRECTORY,
+        :type => 'directory',
         :name => dir_name,
-        :ext  => nil
+        :ext  => ''
       }.stringify_keys!
       subject.as_json.should == json_hash
     end
 
     context 'when directory' do
       it { subject.ext.should_not be_present }
-      it { subject.type.should == Entry::DIRECTORY }
+      it { subject.type.should == 'directory' }
       it { subject.should be_directory }
       it { subject.should_not be_file }
       it { subject.name.should == dir_name }
@@ -44,7 +40,7 @@ module FsBrowser
 
       it { subject.should be_file }
       it { subject.should_not be_directory }
-      it { subject.type.should == Entry::FILE }
+      it { subject.type.should == 'file' }
       it { subject.ext.should == ext }
     end
   end
