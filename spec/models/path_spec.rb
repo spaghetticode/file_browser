@@ -2,8 +2,8 @@ require 'spec_helper'
 
 module FsBrowser
   describe Path do
-    let(:name) { fixtures_filesystem_path }
-    let(:root) { name }
+    let(:name) { '' }
+    let(:root) { fixtures_filesystem_path }
 
     subject { Path.new(name) }
 
@@ -36,20 +36,6 @@ module FsBrowser
       it { Path.root.should == Path::ROOT }
     end
 
-    describe '::name_from_params' do
-      context 'when params[:id] is empty' do
-        it 'is the root path name' do
-          params = {:id => ''}
-          Path.name_from_params(params).should == Path.root
-        end
-      end
-
-      it 'is params[:id]' do
-        params = {:id => name}
-        Path.name_from_params(params).should == name
-      end
-    end
-
     it 'requires a name parameter' do
       expect { Path.new }.to raise_error(ArgumentError)
     end
@@ -71,7 +57,7 @@ module FsBrowser
     end
 
     context 'when a directory exists under the path' do
-      let(:entry_path) { File.join(name, 'folder') }
+      let(:entry_name) { 'folder' }
 
       describe '#file_list' do
         context 'when name is not root' do
@@ -99,7 +85,7 @@ module FsBrowser
         end
 
         it 'correctly sets the type of entry' do
-          dir = subject.entries.detect { |e| e.path == entry_path }
+          dir = subject.entries.detect { |e| e.path == entry_name }
           dir.type.should == 'directory'
         end
       end

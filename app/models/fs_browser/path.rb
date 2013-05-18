@@ -9,22 +9,23 @@ module FsBrowser
       attr_writer :root
 
       def root
-        @root ||= ROOT
+        @root || ROOT
+      end
+
+      def root= value
+        @root = value
       end
     end
 
     attr_reader :name, :entries, :pathname
 
-    def self.name_from_params(params)
-      name = params[:id]
-      name.present? ? name : root
-    end
-
     def initialize(name)
-      @name = name
-      @pathname = Pathname.new(name)
-      validate
-      @entries = get_entries
+      Dir.chdir root do
+        @name = name
+        @pathname = Pathname.new(name)
+        validate
+        @entries = get_entries
+      end
     end
 
     def get_entries
@@ -34,7 +35,7 @@ module FsBrowser
     end
 
     def file_list
-      list = Dir.glob("#{name}/*")
+      list = realpath.children.map {|pn| pn.basename.to_s }
       list.unshift '..' unless root?
       list
     end
@@ -44,18 +45,24 @@ module FsBrowser
     end
 
     def root?
-      name == root
+      name.empty?
     end
 
     def root
       self.class.root
     end
 
+    def realpath
+      begin
+        pathname.realpath
+      rescue Errno::ENOENT
+        raise NotFoundError
+      end
+    end
+
     def validate
-      raise NotFoundError unless pathname.exist?
-      full_name = pathname.realpath.to_s
       full_root = File.expand_path(root)
-      raise ParentError unless full_name =~ /\A#{full_root}/
+      raise ParentError unless realpath.to_s =~ /\A#{full_root}/
     end
   end
 end
