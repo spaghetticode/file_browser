@@ -8,8 +8,10 @@ module FsBrowser
     let(:root)      { Rails.root.join('spec/fixtures/filesystem') }
     let(:dir_path)  { File.join root, dir_name }
     let(:file_path) { File.join root, file_name }
+    let(:dir_pathname) { Pathname.new(dir_path) }
+    let(:file_pathname) { Pathname.new(file_path) }
 
-    subject { Entry.new(dir_path) }
+    subject { Entry.new(dir_pathname) }
 
     it { subject.should respond_to :name }
     it { subject.should respond_to :ext }
@@ -17,9 +19,8 @@ module FsBrowser
     it { subject.should respond_to :file? }
     it { subject.should respond_to :directory? }
 
-    it 'represents the name, path, type and ext in json format' do
+    it 'represents the name, type and ext in json format' do
       json_hash = {
-        :path => dir_path,
         :type => 'directory',
         :name => dir_name,
         :ext  => ''
@@ -36,7 +37,7 @@ module FsBrowser
     end
 
     context 'when file' do
-      subject { Entry.new(file_path) }
+      subject { Entry.new(file_pathname) }
 
       it { subject.should be_file }
       it { subject.should_not be_directory }

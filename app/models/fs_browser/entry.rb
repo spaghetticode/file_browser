@@ -1,19 +1,18 @@
 module FsBrowser
   class Entry
-    attr_reader :name, :ext, :path, :pathname, :type
+    attr_reader :pathname, :name, :ext, :type
 
     delegate :file?, :directory?, :to => :pathname
 
-    def initialize(path)
-      @path = path
-      @pathname = Pathname.new(path)
-      @name = @pathname.basename.to_s
-      @ext  = @pathname.extname.downcase
-      @type = @pathname.ftype rescue Errno::EBADF # it happens in /dev/fd dir
+    def initialize(pathname)
+        @pathname = pathname
+        @name = @pathname.basename.to_s
+        @ext  = @pathname.extname.downcase
+        @type = @pathname.realpath.ftype rescue Errno::EBADF # it happens in /dev/fd dir
     end
 
     def as_json(opts={})
-      {'name' => name, 'type' => type, 'path' => path, 'ext' => ext}
+      {'name' => name, 'type' => type, 'ext' => ext}
     end
   end
 end

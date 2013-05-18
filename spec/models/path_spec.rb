@@ -30,8 +30,12 @@ module FsBrowser
       end
     end
 
+    it 'requires an existing root' do
+      expect { Path.root = '/bogus/path'}.to raise_error(Path::NotFoundError)
+    end
+
     context 'when root is not set' do
-      before { Path.root = nil }
+      before { Path.instance_variable_set '@root', nil }
 
       it { Path.root.should == Path::ROOT }
     end
@@ -64,7 +68,7 @@ module FsBrowser
           before { subject.stub(:root? => false) }
 
           it 'parent dir is included in the list' do
-            subject.file_list.should include('..')
+            subject.file_list.should include Pathname.new('..')
           end
         end
 
@@ -85,7 +89,7 @@ module FsBrowser
         end
 
         it 'correctly sets the type of entry' do
-          dir = subject.entries.detect { |e| e.path == entry_name }
+          dir = subject.entries.detect { |e| e.name == entry_name }
           dir.type.should == 'directory'
         end
       end

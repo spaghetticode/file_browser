@@ -13,6 +13,7 @@ module FsBrowser
       end
 
       def root= value
+        raise NotFoundError unless File.exist?(value)
         @root = value
       end
     end
@@ -29,14 +30,14 @@ module FsBrowser
     end
 
     def get_entries
-      file_list.map do |entry_name|
-        Entry.new(entry_name)
+      file_list.map do |entry_pathname|
+        Entry.new(entry_pathname)
       end
     end
 
     def file_list
-      list = realpath.children.map {|pn| pn.basename.to_s }
-      list.unshift '..' unless root?
+      list = realpath.children
+      list.unshift Pathname.new('..') unless root?
       list
     end
 
