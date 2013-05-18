@@ -11,7 +11,6 @@ class FsBrowser.Modal
       FsBrowser.Path.getJson()
       @submit.off('click.modal_submit').on 'click.modal_submit', =>
         FsBrowser.Callbacks.modalSubmit(event)
-
     @element.modal 'show'
 
   @clearList: -> @list.html ''

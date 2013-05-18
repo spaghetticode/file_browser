@@ -1,7 +1,7 @@
 module FsBrowser
   class Path
-    class NotFoundError < Exception; end
     class ParentError   < Exception; end
+    class NotFoundError < Exception; end
 
     ROOT = '/'
 

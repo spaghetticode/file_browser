@@ -28,6 +28,7 @@ class FsBrowser.Entry
   isDirectory: -> @type is @constructor.DIRECTORY
   extChars:    -> if @ext then @ext[1..] else 'unk'
 
+
   _getIcon: -> "/assets/fs_browser/file_icons/#{@_iconName()}.png"
 
   _iconName: ->
