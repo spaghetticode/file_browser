@@ -6,7 +6,7 @@ module FsBrowser
       before { Path.base = '/' }
 
       it 'is successful' do
-        post :create, :id => 'root', :format => :json
+        post :create, :id => '', :format => :json
         response.should be_success
       end
     end

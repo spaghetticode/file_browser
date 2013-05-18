@@ -11,7 +11,7 @@ class FsBrowser.Path
       success:  @build
 
   @current: =>
-    if @tree.length then @tree.join(@separator) else 'root'
+    if @tree.length then @tree.join(@separator) else ''
 
   @parent: ->
     @tree.pop()

@@ -37,9 +37,9 @@ module FsBrowser
     end
 
     describe '::name_from_params' do
-      context 'when params[:id] is root' do
-        it 'is the base path name when params[:id] is root' do
-          params = {:id => 'root'}
+      context 'when params[:id] is empty' do
+        it 'is the base path name' do
+          params = {:id => ''}
           Path.name_from_params(params).should == Path.base
         end
       end

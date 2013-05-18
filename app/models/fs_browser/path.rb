@@ -17,7 +17,7 @@ module FsBrowser
 
     def self.name_from_params(params)
       name = params[:id]
-      name == 'root' ? base : name
+      name.present? ? name : base
     end
 
     def initialize(name)
