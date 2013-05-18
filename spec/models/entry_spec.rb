@@ -13,7 +13,7 @@ module FsBrowser
 
     it { subject.should respond_to :name }
     it { subject.should respond_to :ext }
-    it { subject.should respond_to :ftype }
+    it { subject.should respond_to :type }
     it { subject.should respond_to :file? }
     it { subject.should respond_to :directory? }
 
@@ -29,7 +29,7 @@ module FsBrowser
 
     context 'when directory' do
       it { subject.ext.should_not be_present }
-      it { subject.ftype.should == 'directory' }
+      it { subject.type.should == 'directory' }
       it { subject.should be_directory }
       it { subject.should_not be_file }
       it { subject.name.should == dir_name }
@@ -40,7 +40,7 @@ module FsBrowser
 
       it { subject.should be_file }
       it { subject.should_not be_directory }
-      it { subject.ftype.should == 'file' }
+      it { subject.type.should == 'file' }
       it { subject.ext.should == ext }
     end
   end

@@ -100,7 +100,7 @@ module FsBrowser
 
         it 'correctly sets the type of entry' do
           dir = subject.entries.detect { |e| e.path == entry_path }
-          dir.ftype.should == 'directory'
+          dir.type.should == 'directory'
         end
       end
 
