@@ -6,13 +6,11 @@ module FsBrowser
     ROOT = '/'
 
     class << self
-      attr_writer :root
-
       def root
         @root || ROOT
       end
 
-      def root= value
+      def root=(value)
         raise NotFoundError unless File.exist?(value)
         @root = value
       end
