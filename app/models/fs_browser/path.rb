@@ -19,18 +19,21 @@ module FsBrowser
     attr_reader :name, :entries, :pathname
 
     def initialize(name)
-      Dir.chdir root do
         @name = name
-        @pathname = Pathname.new(name)
+        @pathname = Pathname.new full_path(name)
         validate
         @entries = get_entries
-      end
     end
 
     def get_entries
       file_list.map do |entry_pathname|
         Entry.new(entry_pathname)
       end
+    end
+
+    def validate
+      relative = realpath.relative_path_from(root)
+      raise raise ParentError if relative.to_s.include? '..'
     end
 
     def children
@@ -54,7 +57,11 @@ module FsBrowser
     end
 
     def root
-      self.class.root
+      Pathname.new(self.class.root)
+    end
+
+    def full_path(name)
+      File.join root, name
     end
 
     def realpath
@@ -63,11 +70,6 @@ module FsBrowser
       rescue Errno::ENOENT
         raise NotFoundError
       end
-    end
-
-    def validate
-      full_root = File.expand_path(root)
-      raise ParentError unless realpath.to_s =~ /\A#{full_root}/
     end
   end
 end

@@ -26,7 +26,11 @@ module FsBrowser
       end
 
       it 'root value is available also on instances' do
-        subject.root.should == Path.root
+        subject.root.to_s.should == Path.root
+      end
+
+      it '#root is a pathname' do
+        subject.root.should be_a Pathname
       end
     end
 
@@ -48,12 +52,9 @@ module FsBrowser
       expect { Path.new('bogus/path') }.to raise_error(Path::NotFoundError)
     end
 
-    describe '#validate' do
-      context 'when the path name is above the root path' do
-
-        it 'raises error' do
-          expect { Path.new( '/') }.to raise_error(FsBrowser::Path::ParentError)
-        end
+    describe '#full_path' do
+      it 'always includes root' do
+        subject.full_path('/something').should == "#{subject.root}/something"
       end
     end
 
@@ -75,6 +76,12 @@ module FsBrowser
           it 'parent dir is not included' do
             subject.file_list.should_not include('..')
           end
+        end
+      end
+
+      context 'when trying to access a root parent dir' do
+        it 'raise an error' do
+          expect { Path.new('folder/../..')}.to raise_error Path::ParentError
         end
       end
 
