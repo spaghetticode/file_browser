@@ -17,11 +17,13 @@ feature 'filesystem modal window', :type => :feature, :js => true do
   end
 
   scenario 'can browse the filesystem tree' do
+    sleep 1
     double_click 'folder'
     modal_window.should have_content 'example.txt'
   end
 
   scenario 'can browse the filesystem backwards' do
+    sleep 1
     double_click 'folder'
     double_click '..'
     modal_window.should_not have_content 'example.txt'
